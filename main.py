@@ -1,14 +1,11 @@
-import PyPDF2, pyttsx3
+from tkinter import *
+from tkinter import filedialog
 
-# Abre o E-book (.pdf)
-path = open("codigo-eficiente-com-python.pdf", "rb")
-pdf_reader = PyPDF2.PdfReader(path)
+def select_pdf_file():
+  root = Tk()
+  root.withdraw()
+  file_path = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
+  root.destroy()
+  return file_path
 
-speak = pyttsx3.init()
-
-# Percorre as páginas do E-book, extrai o texto e faz a leitura
-for page in pdf_reader.pages:
-  text = page.extract_text()
-  speak.say(text)
-  speak.runAndWait()
-speak.stop()
+print(select_pdf_file())
